@@ -1,37 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { v4 as uuid } from "uuid";
 
-import './Nav.css';
+import "./Nav.css";
 
-import {
-  Link,
-  useLocation,
-} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const NavLink = ({link, currentLocation}) => {
-    const { path, text } = link;
-    const isActive = currentLocation === path;
-    const className = classNames('nav__link', [
-      { 'nav__link--current': isActive },
-    ]);
+const NavLink = ({ link, currentLocation }) => {
+  const { path, text } = link;
+  const isActive = currentLocation === path;
+  const className = classNames("nav__link", [
+    { "nav__link--current": isActive },
+  ]);
 
-    return <Link className={className} to={path}>{text}</Link>
-}
+  return (
+    <Link className={className} to={path}>
+      {text}
+    </Link>
+  );
+};
 
-const Nav = ({links}) => {
+const Nav = ({ links }) => {
   const location = useLocation();
   return (
     <nav className="nav">
-      <ul>
-        {links.map((link) => (
-          <li key={link.key}>
-            <NavLink link={link} currentLocation={location.pathname}/>
-          </li>
-        ))}
-      </ul>
+      <div className="nav__list-container">
+        <ul className="nav__list">
+          {links.map((link) => (
+            <li key={uuid()}>
+              <NavLink link={link} currentLocation={location.pathname} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
-)};
+  );
+};
 
 Nav.propTypes = {
   links: PropTypes.array.isRequired,

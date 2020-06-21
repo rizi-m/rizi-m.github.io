@@ -1,25 +1,37 @@
 .app {
   display: grid;
-  grid-gap: 1rem;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-areas: 
-    "header"
     "nav"
+    "header"
     "main"
     "footer";
 }
 
 header {
-  grid-template-areas: header;
+  grid-area: header;
 }
 
 nav {
-  grid-template-areas: nav;
+  grid-area: nav;
 }
 
 main {
-  grid-template-areas: main;
+  grid-area: main;
 }
 
 footer {
-  grid-template-areas: footer;
+  grid-area: footer;
+}
+
+@media (min-width: 1024px) {
+  .app {
+    grid-template-columns: 14.5% 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+    "nav header header"
+    "nav main main"
+    "footer footer footer";
+  }
+
 }
